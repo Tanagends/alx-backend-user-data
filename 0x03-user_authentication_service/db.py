@@ -55,8 +55,22 @@ class DB:
         usr = self.find_user_by(id=user_id)
 
         for key, update in kwargs.items():
-            if hasattr(self, key):
+            if key in User.__table__.columns:
                 setattr(self, key, update)
             else:
                 raise ValueError
-        self._session.commit()
+        self._session.commit
+
+my_db = DB()
+
+email = 'test@test.com'
+hashed_password = "hashedPwd"
+
+user = my_db.add_user(email, hashed_password)
+print(user.id)
+
+try:
+    my_db.update_user(user.id, hashed_password='NewPwd')
+    print("Password updated")
+except ValueError:
+    print("Error")
