@@ -42,7 +42,7 @@ class DB:
         """returns first row of keyword arguments"""
         valid = [k in User.__table__.columns for k in kwargs.keys()]
 
-        if not all(valid):
+        if not all(valid) or not kwargs:
             raise InvalidRequestError
 
         try:
