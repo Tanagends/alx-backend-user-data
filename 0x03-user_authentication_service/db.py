@@ -31,11 +31,11 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-	def add_user(self, email: str, hashed_password: str) -> User:
-		"""adds user to database"""
-		usr = User(email=email, hashed_password=hashed_password)
-		self.__sesson.add(usr)
-		self.__session.commit()
+    def add_user(self, email: str, hashed_password: str) -> User:
+        """adds user to database"""
+        usr = User(email=email, hashed_password=hashed_password)
+        self.__sesson.add(usr)
+        self.__session.commit()
         return usr
 
     def find_user_by(self, **kwargs: Dict[str, int | str]) -> User:
@@ -51,6 +51,11 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs: Dict[str, int | str]) -> None:
         """Updates usr"""
+        usr = self.find_user_by(id=user_id)
 
-
-
+        for key, update in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, update)
+            else:
+                raise ValueError
+        self.__session.commit()
