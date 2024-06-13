@@ -38,7 +38,7 @@ class DB:
         self._session.commit()
         return usr
 
-    def find_user_by(self, **kwargs: Dict[str, int | str]) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """returns first row of keyword arguments"""
         try:
             usr = self._session.query(User).filter_by(**kwargs).first()
@@ -49,8 +49,7 @@ class DB:
             raise NoResultFound
         return usr
 
-    def update_user(self, user_id: int,
-                    **kwargs: Dict[str, int | str]) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """Updates usr"""
         usr = self.find_user_by(id=user_id)
 
