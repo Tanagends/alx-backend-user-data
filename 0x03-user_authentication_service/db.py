@@ -63,7 +63,7 @@ class DB:
 
         for key, update in kwargs.items():
             if key in User.__table__.columns:
-                setattr(self, key, update)
+                setattr(usr, key, update)
             else:
                 raise ValueError
         self._session.commit
