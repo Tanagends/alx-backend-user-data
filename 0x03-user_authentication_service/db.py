@@ -34,14 +34,14 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """adds user to database"""
         usr = User(email=email, hashed_password=hashed_password)
-        self.__sesson.add(usr)
-        self.__session.commit()
+        self._sesson.add(usr)
+        self._session.commit()
         return usr
 
     def find_user_by(self, **kwargs: Dict[str, int | str]) -> User:
         """returns first row of keyword arguments"""
         try:
-            usr = self.__session.query(User).filter_by(**kwargs).first()
+            usr = self._session.query(User).filter_by(**kwargs).first()
         except AttributeError:
             raise InvalidRequestError
 
@@ -59,4 +59,4 @@ class DB:
                 setattr(self, key, update)
             else:
                 raise ValueError
-        self.__session.commit()
+        self._session.commit()
