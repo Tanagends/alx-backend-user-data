@@ -56,7 +56,10 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Updates usr"""
-        usr = self.find_user_by(id=user_id)
+        try:
+            usr = self.find_user_by(id=user_id)
+        except NoResultFound:
+            raise ValueError
 
         for key, update in kwargs.items():
             if key in User.__table__.columns:
