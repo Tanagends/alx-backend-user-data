@@ -40,6 +40,11 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """returns first row of keyword arguments"""
+        valid = [k in User.__table__.columns for k in kwargs.keys()]
+
+        if not all(valid):
+            raise InvalidRequestError
+
         try:
             usr = self._session.query(User).filter_by(**kwargs).first()
         except AttributeError:
