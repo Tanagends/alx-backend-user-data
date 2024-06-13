@@ -49,7 +49,8 @@ class DB:
             raise NoResultFound
         return usr
 
-    def update_user(self, user_id: int, **kwargs: Dict[str, int | str]) -> None:
+    def update_user(self, user_id: int,
+                    **kwargs: Dict[str, int | str]) -> None:
         """Updates usr"""
         usr = self.find_user_by(id=user_id)
 
