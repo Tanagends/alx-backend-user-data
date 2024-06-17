@@ -24,7 +24,7 @@ def before_request_func():
     """ Pre-request authentication eligibility test
     """
     exc = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
-    if auth is None or auth.require_auth(request.path, exc):
+    if auth is None or not auth.require_auth(request.path, exc):
         pass
 
     if auth.authorization_header(request) is None:
