@@ -21,6 +21,7 @@ if getenv('AUTH_TYPE'):
 
 @app.before_request
 def before_request_func():
+    """Pre-request authentication eligibility test"""
     exc = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if auth is None or auth.require_auth(request.path, exc):
         pass
