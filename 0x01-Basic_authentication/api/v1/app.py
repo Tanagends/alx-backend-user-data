@@ -31,10 +31,10 @@ def before_request_func():
     if auth is None or not auth.require_auth(request.path, exc):
         pass
 
-    if auth.authorization_header(request) is None:
+    elif auth.authorization_header(request) is None:
         abort(401)
 
-    if auth.current_user(request) is None:
+    elif auth.current_user(request) is None:
         abort(403)
 
 
