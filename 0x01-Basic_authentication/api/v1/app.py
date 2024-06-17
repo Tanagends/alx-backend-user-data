@@ -21,7 +21,8 @@ if getenv('AUTH_TYPE'):
 
 @app.before_request
 def before_request_func():
-    """Pre-request authentication eligibility test"""
+    """ Pre-request authentication eligibility test
+    """
     exc = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if auth is None or auth.require_auth(request.path, exc):
         pass
@@ -42,13 +43,15 @@ def not_found(error) -> str:
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
-    """Not authorized"""
+    """Not authorized
+    """
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
 def forbidden(error):
-    """Forbidden error handler"""
+    """Forbidden error handler
+    """
     return jsonify({"error": "Forbidden"}), 403
 
 
